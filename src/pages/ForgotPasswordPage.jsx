@@ -14,15 +14,16 @@ const ForgotPasswordPage = () => {
   };
 
   return (
-    <section>
-      <h1>FORGOT PASSWORD</h1>
-      <form onSubmit={submitHandler}>
-        <div>
+    <section className="formContainer">
+      <h1 className="formTitle">FORGOT PASSWORD</h1>
+      <form onSubmit={submitHandler} className="formContent">
+        <div className="formInputContainer">
           <label htmlFor="email">Email</label>
           <input
             type="email"
             name="email"
             id="email"
+            placeholder="Enter your email"
             required
             onChange={(e) => setEmail(e.target.value)}
           />

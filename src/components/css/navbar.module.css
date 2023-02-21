@@ -1,0 +1,131 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  font-size: 1.75rem;
+  margin: 5rem 0;
+}
+
+.logo {
+  flex: 1;
+  font-size: 2.5rem;
+  text-transform: uppercase;
+  color: var(--secondaryTextColor);
+}
+.navLinks {
+  flex: 6;
+  display: flex;
+  align-items: center;
+}
+
+.navCategoryLinks {
+  flex: 3;
+  display: flex;
+  justify-content: space-evenly;
+}
+.navCategoryLinks li {
+  margin: 0 2rem;
+}
+.navCategoryLinks li a:hover {
+  color: var(--secondaryTextColor);
+  text-decoration: underline;
+}
+
+.navAuthLinks {
+  flex: 2;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  text-transform: uppercase;
+}
+.navAuthLinks a {
+  margin-left: 3rem;
+}
+.navAuthLinks a span {
+  margin-left: 1rem;
+}
+.navAuthLinks .borderBtn {
+  font-size: 1.75rem;
+  border: 0.2rem solid var(--secondaryTextColor);
+  padding: 1rem 2rem;
+  margin-left: 3rem;
+}
+
+.closeNavBtn {
+  margin-bottom: 2.5rem;
+  color: var(--secondaryTextColor);
+  cursor: pointer;
+  display: none;
+}
+.openNavBtn {
+  font-size: 2.5rem;
+  color: var(--secondaryTextColor);
+  display: none;
+}
+
+@media screen and (max-width: 1356px) {
+  .navLinks {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    background: var(--secondaryBackgroundColor);
+    height: 100%;
+    width: 100%;
+
+    flex: 1;
+    flex-direction: column;
+    align-items: flex-start;
+
+    font-size: 3rem;
+    padding: 5rem;
+
+    transition: all 0.3s ease-in-out;
+    transform: translateX(-100%);
+  }
+
+  .navCategoryLinks {
+    flex: 0;
+    flex-direction: column;
+    order: 2;
+    margin-top: 3rem;
+  }
+  .navCategoryLinks li {
+    margin: 0;
+    margin-bottom: 2rem;
+  }
+
+  .navAuthLinks {
+    flex: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    order: 1;
+    margin-top: 3rem;
+  }
+  .navAuthLinks a {
+    margin: 0;
+    margin-bottom: 2.5rem;
+  }
+  .navAuthLinks .borderBtn {
+    margin: 0;
+    margin-bottom: 2.5rem;
+    font-size: 3rem;
+  }
+
+  .closeNavBtn {
+    display: block;
+  }
+
+  .openNavBtn {
+    display: block;
+  }
+
+  .showNav {
+    transform: translateX(0%);
+  }
+
+  .hideNav {
+    transform: translateX(-100%);
+  }
+}

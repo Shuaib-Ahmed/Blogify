@@ -1,0 +1,17 @@
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2rem 0;
+}
+
+.footer .logo {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: var(--secondaryTextColor);
+  text-transform: uppercase;
+}
+
+.footer .content {
+  font-size: 1.5rem;
+}

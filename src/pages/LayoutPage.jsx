@@ -4,7 +4,7 @@ import { Navbar, Footer } from "../components";
 
 const LayoutPage = () => {
   return (
-    <section>
+    <section className="pageContainer">
       <Navbar />
       <Outlet />
       <Footer />

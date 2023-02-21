@@ -24,25 +24,28 @@ const LoginPage = () => {
   };
 
   return (
-    <section>
-      <h1>LOGIN PAGE</h1>
-      <form onSubmit={submitHandler}>
-        <div>
+    <section className="formContainer">
+      <h1 className="formTitle">LOGIN PAGE</h1>
+      
+      <form onSubmit={submitHandler} className="formContent">
+        <div className="formInputContainer">
           <label htmlFor="email">Email</label>
           <input
             type="email"
             name="email"
             id="email"
+            placeholder="Enter your email"
             required
             onChange={changeHandler}
           />
         </div>
-        <div>
+        <div className="formInputContainer">
           <label htmlFor="password">Password</label>
           <input
             type="text"
             name="password"
             id="password"
+            placeholder="Enter your password"
             required
             onChange={changeHandler}
           />
@@ -50,7 +53,7 @@ const LoginPage = () => {
         <button type="submit">Log In</button>
       </form>
 
-      <Link to="/forgot-password">Forgot Password</Link>
+      <Link to="/forgot-password" className="forgotPasswordBtn">Forgot Password ??</Link>
     </section>
   );
 };

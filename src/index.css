@@ -1,0 +1,112 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+:root {
+  --primaryBackgroundColor: #331832;
+  --secondaryBackgroundColor: #634e63;
+  --primaryTextColor: #f0eff4;
+  --secondaryTextColor: #ffead0;
+}
+html {
+  font-size: 10px;
+}
+body {
+  background-color: var(--primaryBackgroundColor);
+  color: var(--primaryTextColor);
+  font-family: "Raleway", sans-serif;
+}
+ul li {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+  color: var(--primaryTextColor);
+}
+button {
+  text-transform: uppercase;
+  border: none;
+  background: none;
+  color: var(--primaryTextColor);
+  cursor: pointer;
+}
+
+.pageContainer {
+  width: 90vw;
+  margin: 1rem auto;
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10rem 0;
+}
+.formContainer .formTitle {
+  font-size: 2.5rem;
+  color: var(--secondaryTextColor);
+}
+.formContainer .formContent {
+  background: var(--secondaryBackgroundColor);
+  margin: 2rem 0;
+  padding: 2rem 3rem;
+  width: 50%;
+
+  display: flex;
+  flex-direction: column;
+}
+.formContainer .formContent .formInputContainer {
+  margin: 2rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.formContainer .formContent .formInputContainer label {
+  font-size: 2rem;
+  margin-right: 1rem;
+}
+.formContainer .formContent .formInputContainer input {
+  font-size: 2rem;
+  width: 60%;
+  padding: 0.5rem;
+  border: 0;
+}
+.formContainer .formContent .formInputContainer input:focus {
+  outline: none;
+}
+.formContainer .formContent button {
+  background: var(--primaryBackgroundColor);
+  margin: 2rem 0;
+  padding: 1rem 0;
+}
+.formContainer .forgotPasswordBtn{
+  color: var(--secondaryTextColor);
+  font-size: 2rem;
+  margin-top: 1rem;
+  text-decoration: underline;
+}
+
+@media screen and (max-width: 996px) {
+  .formContainer .formContent {
+    width: 70%;
+  }
+}
+
+@media screen and (max-width: 776px) {
+  html {
+    font-size: 9px;
+  }
+  .formContainer .formContent {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 556px) {
+  html {
+    font-size: 8px;
+  }
+  .formContainer .formContent {
+    width: 100%;
+  }
+}

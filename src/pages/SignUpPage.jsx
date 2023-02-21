@@ -30,10 +30,10 @@ const SignUpPage = () => {
   };
 
   return (
-    <section>
-      <h1>SIGN UP</h1>
-      <form onSubmit={submitHandler}>
-        <div>
+    <section className="formContainer">
+      <h1 className="formTitle">SIGN UP</h1>
+      <form onSubmit={submitHandler} className="formContent">
+        <div className="formInputContainer">
           <label htmlFor="photo">Profile Photo</label>
           <input
             type="file"
@@ -44,37 +44,40 @@ const SignUpPage = () => {
             onChange={changeHandler}
           />
         </div>
-        <div>
+        <div className="formInputContainer">
           <label htmlFor="displayName">Pen Name</label>
           <input
             type="text"
             name="displayName"
             id="displayName"
+            placeholder="Enter your name"
             required
             onChange={changeHandler}
           />
         </div>
-        <div>
+        <div className="formInputContainer">
           <label htmlFor="email">Email</label>
           <input
             type="email"
             name="email"
             id="email"
+            placeholder="Enter your email"
             required
             onChange={changeHandler}
           />
         </div>
-        <div>
+        <div className="formInputContainer">
           <label htmlFor="password">Password</label>
           <input
             type="text"
             name="password"
             id="password"
+            placeholder="Enter your password"
             required
             onChange={changeHandler}
           />
         </div>
-        <button type="submit">Sign Up</button>
+        <button type="submit">Sign-Up</button>
       </form>
     </section>
   );
