@@ -82,11 +82,13 @@ export const updateBlog = async (input, blog_id) => {
 
       if (imgResponse.errorStatus) {
         throw new Error({ message: imgResponse.message });
+      } else {
+        input = { ...input, blog_image: imgResponse.url };
       }
     }
+
     await updateDoc(doc(db, "blogs", blog_id), {
       ...input,
-      blog_image: imgResponse.url,
     });
     return { errorStatus: false };
   } catch (error) {

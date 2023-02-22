@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 import { getBlogs } from "../util/blogactions";
+import style from "./css/blogCategory.module.css";
 
 const BlogCategoryPage = () => {
   const { category } = useParams();
@@ -25,10 +26,16 @@ const BlogCategoryPage = () => {
     <section>
       {blogs.map(({ title, summary, blog_image, blog_id }) => {
         return (
-          <div key={blog_id}>
-            <img src={blog_image} alt="blog pic" />
-            <h2>{title}</h2>
-            <p>{summary.substr(0, 100)}</p>
+          <div key={blog_id} className={style.blogContainer}>
+            <div className={style.blogContent}>
+              <h2>{title}</h2>
+              <p>{summary.substr(0, 250)} ...</p>
+              <Link to="/">Read More</Link>
+            </div>
+            <div className={style.imgContainer}>
+              <div></div>
+              <img src={blog_image} alt="blog pic" />
+            </div>
           </div>
         );
       })}

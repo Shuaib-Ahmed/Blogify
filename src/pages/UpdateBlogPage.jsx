@@ -52,11 +52,12 @@ const UpdateBlogPage = () => {
         console.log(response.message);
       }
     }
+    console.log(input);
   };
 
   return (
     <section>
-      <h1>Write new blogs</h1>
+      <h1>Update blog</h1>
 
       {Object.values(blog).length !== 0 && (
         <form onSubmit={submitHandler}>
@@ -97,41 +98,19 @@ const UpdateBlogPage = () => {
           <div>
             <h3>Select Category</h3>
             {blogCategories.map((category, index) => {
-              if (blog.category !== category || input.category !== undefined) {
-                return (
-                  <div key={index}>
-                    <label htmlFor={category}>{category}</label>
-                    <input
-                      type="radio"
-                      name="category"
-                      id={category}
-                      value={category}
-                      required
-                      onChange={changeHandler}
-                    />
-                  </div>
-                );
-              } else if (
-                blog.category === category &&
-                input.category === undefined
-              ) {
-                return (
-                  <div key={index}>
-                    <label htmlFor={category}>{category}</label>
-                    <input
-                      type="radio"
-                      name="category"
-                      id={category}
-                      value={category}
-                      required
-                      onChange={changeHandler}
-                      checked
-                    />
-                  </div>
-                );
-              } else {
-                return <></>;
-              }
+              return (
+                <div key={index}>
+                  <label htmlFor={category}>{category}</label>
+                  <input
+                    type="radio"
+                    name="category"
+                    id={category}
+                    value={category}
+                    onChange={changeHandler}
+                    defaultChecked={category === blog.category}
+                  />
+                </div>
+              );
             })}
           </div>
 

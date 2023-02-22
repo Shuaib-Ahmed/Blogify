@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { blogCategories, createNewBlog } from "../util/blogactions";
+import style from "./css/writeBlog.module.css";
 
 const WriteBlogPage = () => {
   const navigate = useNavigate();
 
   const [input, setInput] = useState({});
-  const [photoUrl, setPhotoUrl] = useState("");
+  const [photoUrl, setPhotoUrl] = useState("/image/default_image.png");
 
   const changeHandler = (e) => {
     setInput((prevState) => {
@@ -36,11 +37,30 @@ const WriteBlogPage = () => {
   };
 
   return (
-    <section>
-      <h1>Write new blogs</h1>
+    <section className="formContainer">
+      <h1 className="formTitle">PUBLISH NEW BLOG</h1>
 
-      <form onSubmit={submitHandler}>
-        <div>
+      <form
+        onSubmit={submitHandler}
+        className={style.formContent}
+      >
+        <div className={style.imgContainer}>
+          <img src={photoUrl} alt="blog_pic" />
+        </div>
+
+        <div className={style.formInputContainer}>
+          <label htmlFor="blog_image">Blog Image</label>
+          <input
+            type="file"
+            name="blog_image"
+            id="blog_image"
+            accept="image/*"
+            required
+            onChange={imageHandler}
+          />
+        </div>
+
+        <div className={style.formInputContainer}>
           <label htmlFor="title">Blog Title</label>
           <input
             type="text"
@@ -48,48 +68,40 @@ const WriteBlogPage = () => {
             id="title"
             required
             onChange={changeHandler}
+            placeholder="Enter blog title"
           />
         </div>
-        <div>
+
+        <div className={style.formInputContainer}>
           <label htmlFor="summary">Blog Details</label>
           <textarea
             name="summary"
             id="summary"
             required
             onChange={changeHandler}
+            placeholder="Enter blog details"
           ></textarea>
         </div>
-        <div>
-          {photoUrl && <img src={photoUrl} alt="blog_pic" />}
+
+        <div className={style.categoryContainer}>
+          <p>Select Category</p>
           <div>
-            <label htmlFor="blog_image">Blog Image</label>
-            <input
-              type="file"
-              name="blog_image"
-              id="blog_image"
-              accept="image/*"
-              required
-              onChange={imageHandler}
-            />
+            {blogCategories.map((category, index) => {
+              return (
+                <div key={index}>
+                  <input
+                    type="radio"
+                    name="category"
+                    id={category}
+                    value={category}
+                    required
+                    onChange={changeHandler}
+                  />
+                  <label htmlFor={category}>{category}</label>
+                </div>
+              );
+            })}
           </div>
-        </div>
-        <div>
-          <h3>Select Category</h3>
-          {blogCategories.map((category, index) => {
-            return (
-              <div key={index}>
-                <label htmlFor={category}>{category}</label>
-                <input
-                  type="radio"
-                  name="category"
-                  id={category}
-                  value={category}
-                  required
-                  onChange={changeHandler}
-                />
-              </div>
-            );
-          })}
         </div>
 
         <button type="submit">Submit</button>

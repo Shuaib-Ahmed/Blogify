@@ -1,0 +1,77 @@
+.formContent {
+  background: var(--secondaryBackgroundColor);
+  margin: 2rem 0;
+  padding: 2rem 3rem;
+  width: 70%;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.imgContainer {
+  width: 100%;
+  height: 35rem;
+}
+.imgContainer img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.formInputContainer {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem 0;
+}
+.formInputContainer label {
+  font-size: 2rem;
+  margin: 0.5rem 0;
+}
+.formInputContainer textarea {
+  height: 47.5rem;
+}
+.formInputContainer input,
+.formInputContainer textarea {
+  font-size: 2rem;
+  padding: 0.5rem;
+  border: 0;
+}
+.formInputContainer input:focus,
+.formInputContainer textarea:focus {
+  outline: none;
+}
+
+.categoryContainer {
+  font-size: 2rem;
+  margin: 1rem 0;
+}
+.categoryContainer div {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0.5rem 0;
+}
+.categoryContainer div div {
+  margin-right: 2rem;
+}
+.categoryContainer div div label {
+  margin-left: 0.5rem;
+}
+
+.formContent button {
+  background: var(--primaryBackgroundColor);
+  margin: 2rem 0;
+  padding: 1rem 0;
+  font-size: 2rem;
+}
+
+@media screen and (max-width: 996px) {
+  .formContent {
+    width: 85%;
+  }
+}
+
+@media screen and (max-width: 776px) {
+  .formContent {
+    width: 100%;
+  }
+}
