@@ -25,8 +25,6 @@ export const createUser = async ({ email, password, displayName, photo }) => {
       throw new Error({ message: imgResponse.message });
     }
 
-    console.log(imgResponse.url);
-
     const profileResponse = await updateUserProfile(
       displayName,
       imgResponse.url

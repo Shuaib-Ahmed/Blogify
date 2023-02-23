@@ -1,9 +1,17 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+
+import { Loading, Modal } from "../components";
 import { logInUser } from "../util/authactions";
 
 const LoginPage = () => {
   const [input, setInput] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState({
+    errorStatus: false,
+    message: "",
+  });
+
   const navigate = useNavigate();
 
   const changeHandler = (e) => {
@@ -14,20 +22,28 @@ const LoginPage = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    setError({ errorStatus: false, message: "" });
+
+    setLoading(true);
     const response = await logInUser(input);
+    setLoading(false);
 
     if (!response.errorStatus) {
       navigate("/");
     } else {
-      console.log(response.message);
+      setError({ errorStatus: true, message: response.message });
     }
   };
 
   return (
     <section className="formContainer">
+      {error.errorStatus && <Modal error={error} />}
+
       <h1 className="formTitle">LOGIN PAGE</h1>
-      
+
       <form onSubmit={submitHandler} className="formContent">
+        {loading && <Loading />}
+
         <div className="formInputContainer">
           <label htmlFor="email">Email</label>
           <input
@@ -53,7 +69,9 @@ const LoginPage = () => {
         <button type="submit">Log In</button>
       </form>
 
-      <Link to="/forgot-password" className="forgotPasswordBtn">Forgot Password ??</Link>
+      <Link to="/forgot-password" className="forgotPasswordBtn">
+        Forgot Password ??
+      </Link>
     </section>
   );
 };

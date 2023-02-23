@@ -1,0 +1,39 @@
+.modalContent {
+  color: black;
+  background: white;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 50%;
+  height: 50vh;
+
+  padding: 2rem 1rem;
+}
+.modalContent h1 {
+  font-size: 2.5rem;
+}
+.modalContent h3 {
+  margin: 2rem 0;
+  font-size: 2rem;
+}
+.modalContent button {
+  color: red;
+  border: 0.1rem solid red;
+  padding: 0.5rem 1rem;
+  font-size: 1.5rem;
+}
+
+@media screen and (max-width: 996px) {
+  .modalContent {
+    width: 70%;
+  }
+}
+
+@media screen and (max-width: 776px) {
+  .modalContent {
+    width: 90%;
+  }
+}

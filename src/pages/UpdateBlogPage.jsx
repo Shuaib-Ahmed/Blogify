@@ -1,23 +1,35 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
+import { Loading, Modal } from "../components";
 import { blogCategories, getBlog, updateBlog } from "../util/blogactions";
+import style from "./css/writeBlog.module.css";
 
 const UpdateBlogPage = () => {
   const navigate = useNavigate();
   const { blog_id } = useParams();
 
   const [input, setInput] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState({
+    errorStatus: false,
+    message: "",
+  });
   const [blog, setBlog] = useState({});
-  const [photoUrl, setPhotoUrl] = useState("");
+  const [photoUrl, setPhotoUrl] = useState("/image/default_image.png");
 
   const getBlogData = async () => {
+    setError({ errorStatus: false, message: "" });
+
+    setLoading(true);
     const response = await getBlog(blog_id);
+    setLoading(false);
+
     if (!response.errorStatus) {
       setBlog(response.data);
       setPhotoUrl(response.data.blog_image);
     } else {
-      console.log(response.message);
+      setError({ errorStatus: true, message: response.message });
     }
   };
 
@@ -42,49 +54,45 @@ const UpdateBlogPage = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    setError({ errorStatus: false, message: "" });
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+
     if (Object.values(input).length === 0) {
-      console.log("Please update form");
+      setError({ errorStatus: true, message: "Please update blog data" });
     } else {
+      setLoading(true);
       const response = await updateBlog(input, blog_id);
+      setLoading(false);
+
       if (!response.errorStatus) {
         navigate("/account");
       } else {
-        console.log(response.message);
+        setError({ errorStatus: true, message: response.message });
       }
     }
-    console.log(input);
   };
 
   return (
-    <section>
-      <h1>Update blog</h1>
+    <section className="formContainer">
+      {error.errorStatus && <Modal error={error} />}
+
+      {Object.values(blog).length === 0 && loading && <Loading />}
 
       {Object.values(blog).length !== 0 && (
-        <form onSubmit={submitHandler}>
-          <div>
-            <label htmlFor="title">Blog Title</label>
-            <input
-              type="text"
-              name="title"
-              id="title"
-              required
-              onChange={changeHandler}
-              defaultValue={blog.title}
-            />
-          </div>
-          <div>
-            <label htmlFor="summary">Blog Details</label>
-            <textarea
-              name="summary"
-              id="summary"
-              required
-              onChange={changeHandler}
-              defaultValue={blog.summary}
-            ></textarea>
-          </div>
-          <div>
-            {photoUrl && <img src={photoUrl} alt="blog_pic" />}
-            <div>
+        <>
+          <h1 className="formTitle">UPDATE BLOG</h1>
+          <form onSubmit={submitHandler} className={style.formContent}>
+            {loading && <Loading />}
+
+            <div className={style.imgContainer}>
+              <img src={photoUrl} alt="blog_pic" />
+            </div>
+
+            <div className={style.formInputContainer}>
               <label htmlFor="blog_image">Change Blog Image</label>
               <input
                 type="file"
@@ -94,28 +102,52 @@ const UpdateBlogPage = () => {
                 onChange={imageHandler}
               />
             </div>
-          </div>
-          <div>
-            <h3>Select Category</h3>
-            {blogCategories.map((category, index) => {
-              return (
-                <div key={index}>
-                  <label htmlFor={category}>{category}</label>
-                  <input
-                    type="radio"
-                    name="category"
-                    id={category}
-                    value={category}
-                    onChange={changeHandler}
-                    defaultChecked={category === blog.category}
-                  />
-                </div>
-              );
-            })}
-          </div>
 
-          <button type="submit">Submit</button>
-        </form>
+            <div className={style.formInputContainer}>
+              <label htmlFor="title">Blog Title</label>
+              <input
+                type="text"
+                name="title"
+                id="title"
+                required
+                onChange={changeHandler}
+                defaultValue={blog.title}
+              />
+            </div>
+
+            <div className={style.formInputContainer}>
+              <label htmlFor="summary">Blog Details</label>
+              <textarea
+                name="summary"
+                id="summary"
+                required
+                onChange={changeHandler}
+                defaultValue={blog.summary}
+              ></textarea>
+            </div>
+
+            <div className={style.categoryContainer}>
+              <p>Select Category</p>
+              {blogCategories.map((category, index) => {
+                return (
+                  <div key={index}>
+                    <label htmlFor={category}>{category}</label>
+                    <input
+                      type="radio"
+                      name="category"
+                      id={category}
+                      value={category}
+                      onChange={changeHandler}
+                      defaultChecked={category === blog.category}
+                    />
+                  </div>
+                );
+              })}
+            </div>
+
+            <button type="submit">Submit</button>
+          </form>
+        </>
       )}
     </section>
   );

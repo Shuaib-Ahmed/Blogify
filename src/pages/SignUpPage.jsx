@@ -1,10 +1,17 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { Loading, Modal } from "../components";
 import { createUser } from "../util/authactions";
 
 const SignUpPage = () => {
   const [input, setInput] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState({
+    errorStatus: false,
+    message: "",
+  });
+
   const navigate = useNavigate();
 
   const changeHandler = (e) => {
@@ -19,20 +26,28 @@ const SignUpPage = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    console.log(input);
+    setError({ errorStatus: false, message: "" });
+
+    setLoading(true);
     const response = await createUser(input);
+    setLoading(false);
 
     if (!response.errorStatus) {
       navigate("/");
     } else {
-      console.log(response.message);
+      setError({ errorStatus: true, message: response.message });
     }
   };
 
   return (
     <section className="formContainer">
+      {error.errorStatus && <Modal error={error} />}
+
       <h1 className="formTitle">SIGN UP</h1>
+
       <form onSubmit={submitHandler} className="formContent">
+        {loading && <Loading />}
+
         <div className="formInputContainer">
           <label htmlFor="photo">Profile Photo</label>
           <input

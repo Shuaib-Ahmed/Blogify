@@ -1,20 +1,31 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 
+import { Loading, Modal } from "../components";
 import { getBlogs } from "../util/blogactions";
 import style from "./css/blogCategory.module.css";
 
 const BlogCategoryPage = () => {
   const { category } = useParams();
 
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState({
+    errorStatus: false,
+    message: "",
+  });
   const [blogs, setBlogs] = useState([]);
 
   const getBlogsData = async () => {
+    setError({ errorStatus: false, message: "" });
+
+    setLoading(true);
     const response = await getBlogs(category);
+    setLoading(false);
+
     if (!response.errorStatus) {
       setBlogs(response.data);
     } else {
-      console.log(response.message);
+      setError({ errorStatus: true, message: response.message });
     }
   };
 
@@ -24,7 +35,11 @@ const BlogCategoryPage = () => {
 
   return (
     <section>
-      {blogs.map(({ title, summary, blog_image, blog_id }) => {
+      {error.errorStatus && <Modal error={error} />}
+
+      {loading && <Loading />}
+
+      {!loading && blogs.map(({ title, summary, blog_image, blog_id }) => {
         return (
           <div key={blog_id} className={style.blogContainer}>
             <div className={style.blogContent}>

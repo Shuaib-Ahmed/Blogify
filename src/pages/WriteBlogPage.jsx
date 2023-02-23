@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { Loading, Modal } from "../components";
 import { blogCategories, createNewBlog } from "../util/blogactions";
 import style from "./css/writeBlog.module.css";
 
@@ -8,6 +9,11 @@ const WriteBlogPage = () => {
   const navigate = useNavigate();
 
   const [input, setInput] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState({
+    errorStatus: false,
+    message: "",
+  });
   const [photoUrl, setPhotoUrl] = useState("/image/default_image.png");
 
   const changeHandler = (e) => {
@@ -27,23 +33,33 @@ const WriteBlogPage = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+
+    setError({ errorStatus: false, message: "" });
+
+    setLoading(true);
     const response = await createNewBlog(input);
+    setLoading(false);
 
     if (!response.errorStatus) {
       navigate("/account");
     } else {
-      console.log(response.message);
+      setError({ errorStatus: true, message: response.message });
     }
   };
 
   return (
     <section className="formContainer">
+      {error.errorStatus && <Modal error={error} />}
+
       <h1 className="formTitle">PUBLISH NEW BLOG</h1>
 
-      <form
-        onSubmit={submitHandler}
-        className={style.formContent}
-      >
+      <form onSubmit={submitHandler} className={style.formContent}>
+        {loading && <Loading />}
+
         <div className={style.imgContainer}>
           <img src={photoUrl} alt="blog_pic" />
         </div>
