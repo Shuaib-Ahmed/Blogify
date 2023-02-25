@@ -1,5 +1,5 @@
 import React from "react";
-import "./index.css"
+import "./index.css";
 
 import {
   createBrowserRouter,
@@ -19,6 +19,7 @@ import {
   UpdateBlogPage,
   AccountPage,
   ProtectPage,
+  BlogDetailPage,
 } from "./pages";
 
 import { blogCategories } from "./util/blogactions";
@@ -61,6 +62,14 @@ const App = () => {
           element={
             <ProtectPage>
               <UpdateBlogPage />
+            </ProtectPage>
+          }
+        />
+        <Route
+          path="blog/:blog_id"
+          element={
+            <ProtectPage>
+              <BlogDetailPage />
             </ProtectPage>
           }
         />

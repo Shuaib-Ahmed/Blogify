@@ -12,12 +12,13 @@ const AccountPage = () => {
       setUser(user);
     }
   });
+  
   return (
     <>
       {Object.keys(user).length !== 0 && (
         <>
-          <AccountDetails user={user} />
-          <AccountBlogSection user_id={user.uid}/>
+          <AccountDetails user_id={user.uid} />
+          <AccountBlogSection user_id={user.uid} />
         </>
       )}
     </>

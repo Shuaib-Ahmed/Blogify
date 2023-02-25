@@ -5,6 +5,7 @@ import {
   collection,
   addDoc,
   updateDoc,
+  deleteDoc,
   doc,
   getDoc,
   getDocs,
@@ -12,7 +13,7 @@ import {
   where,
 } from "firebase/firestore";
 
-import { storeImage } from "./authactions";
+import { storeImage, deleteImage } from "./authactions";
 
 export const db = getFirestore(app);
 
@@ -96,4 +97,55 @@ export const updateBlog = async (input, blog_id) => {
   }
 };
 
-export const blogCategories = ["science", "sport", "music", "movie"];
+export const deletetBlog = async (blog_id) => {
+  try {
+    const imgResponse = await deleteImage("blog_photo", blog_id);
+    if (imgResponse.errorStatus) {
+      throw new Error({ message: imgResponse.message });
+    }
+
+    await deleteDoc(doc(db, "blogs", blog_id));
+    return { errorStatus: false };
+  } catch (error) {
+    return { errorStatus: true, message: error.message };
+  }
+};
+
+export const storeUserDetails = async ({ displayName, photoURL, user_id }) => {
+  try {
+    await addDoc(collection(db, "user_details"), {
+      displayName,
+      photoURL,
+      user_id,
+    });
+    return { errorStatus: false };
+  } catch (error) {
+    return { errorStatus: true, message: error.message };
+  }
+};
+
+export const getUserDetails = async (user_id) => {
+  try {
+    const data = [];
+    const querySnapShot = await getDocs(
+      query(collection(db, "user_details"), where("user_id", "==", user_id))
+    );
+
+    querySnapShot.forEach((doc) => {
+      data.push({ ...doc.data() });
+    });
+
+    return { errorStatus: false, data: data[0] };
+  } catch (error) {
+    return { errorStatus: true, message: error.message };
+  }
+};
+
+export const blogCategories = [
+  "science",
+  "sport",
+  "music",
+  "movie",
+  "food",
+  "travel",
+];

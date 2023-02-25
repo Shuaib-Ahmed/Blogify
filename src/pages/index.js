@@ -8,6 +8,7 @@ import WriteBlogPage from "./WriteBlogPage";
 import UpdateBlogPage from "./UpdateBlogPage";
 import AccountPage from "./AccountPage";
 import ProtectPage from "./ProtectPage";
+import BlogDetailPage from "./BlogDetailPage";
 
 export {
   LayoutPage,
@@ -20,4 +21,5 @@ export {
   UpdateBlogPage,
   AccountPage,
   ProtectPage,
+  BlogDetailPage
 };

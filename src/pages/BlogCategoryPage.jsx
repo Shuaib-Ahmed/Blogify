@@ -39,21 +39,22 @@ const BlogCategoryPage = () => {
 
       {loading && <Loading />}
 
-      {!loading && blogs.map(({ title, summary, blog_image, blog_id }) => {
-        return (
-          <div key={blog_id} className={style.blogContainer}>
-            <div className={style.blogContent}>
-              <h2>{title}</h2>
-              <p>{summary.substr(0, 250)} ...</p>
-              <Link to="/">Read More</Link>
+      {!loading &&
+        blogs.map(({ title, summary, blog_image, blog_id }) => {
+          return (
+            <div key={blog_id} className={style.blogContainer}>
+              <div className={style.blogContent}>
+                <h2>{title}</h2>
+                <p>{summary.substr(0, 250)} ...</p>
+                <Link to={`/blog/${blog_id}`}>Read More</Link>
+              </div>
+              <div className={style.imgContainer}>
+                <div></div>
+                <img src={blog_image} alt="blog pic" />
+              </div>
             </div>
-            <div className={style.imgContainer}>
-              <div></div>
-              <img src={blog_image} alt="blog pic" />
-            </div>
-          </div>
-        );
-      })}
+          );
+        })}
     </section>
   );
 };

@@ -7,7 +7,15 @@ import {
   updateProfile,
   signOut,
 } from "firebase/auth";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import {
+  getStorage,
+  ref,
+  uploadBytes,
+  getDownloadURL,
+  deleteObject,
+} from "firebase/storage";
+
+import { storeUserDetails } from "./blogactions";
 
 export const auth = getAuth(app);
 const storage = getStorage();
@@ -25,13 +33,14 @@ export const createUser = async ({ email, password, displayName, photo }) => {
       throw new Error({ message: imgResponse.message });
     }
 
-    const profileResponse = await updateUserProfile(
+    const userDetailResponse = await storeUserDetails({
       displayName,
-      imgResponse.url
-    );
+      photoURL: imgResponse.url,
+      user_id: user.uid,
+    });
 
-    if (profileResponse.errorStatus) {
-      throw new Error({ message: profileResponse.message });
+    if (userDetailResponse.errorStatus) {
+      throw new Error({ message: userDetailResponse.message });
     }
 
     return { errorStatus: false };
@@ -86,6 +95,17 @@ export const storeImage = async (photo, filePath, userId) => {
     const url = await getDownloadURL(imageRef);
 
     return { errorStatus: false, url: url };
+  } catch (error) {
+    return { errorStatus: true, message: error.message };
+  }
+};
+
+export const deleteImage = async (filePath, userId) => {
+  try {
+    const imageRef = ref(storage, `${filePath}/${userId}`);
+    await deleteObject(imageRef);
+
+    return { errorStatus: false };
   } catch (error) {
     return { errorStatus: true, message: error.message };
   }
