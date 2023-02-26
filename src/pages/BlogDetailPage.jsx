@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import DOMPurify from "dompurify";
 
 import style from "./css/blogDetail.module.css";
 import { Loading, Modal } from "../components";
@@ -71,7 +72,12 @@ const BlogDetailPage = () => {
             </div>
           </div>
 
-          <p className={style.blogSummary}>{blogData.summary}</p>
+          <p
+            dangerouslySetInnerHTML={{
+              __html: DOMPurify.sanitize(blogData.summary),
+            }}
+            className={style.blogSummary}
+          ></p>
         </section>
       )}
     </>

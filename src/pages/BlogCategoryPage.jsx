@@ -29,6 +29,11 @@ const BlogCategoryPage = () => {
     }
   };
 
+  const getText = (html) => {
+    const doc = new DOMParser().parseFromString(html, "text/html");
+    return doc.body.textContent;
+  };
+
   useEffect(() => {
     getBlogsData();
   }, [category]);
@@ -45,7 +50,7 @@ const BlogCategoryPage = () => {
             <div key={blog_id} className={style.blogContainer}>
               <div className={style.blogContent}>
                 <h2>{title}</h2>
-                <p>{summary.substr(0, 250)} ...</p>
+                <p>{getText(summary).substr(0, 250)} ...</p>
                 <Link to={`/blog/${blog_id}`}>Read More</Link>
               </div>
               <div className={style.imgContainer}>

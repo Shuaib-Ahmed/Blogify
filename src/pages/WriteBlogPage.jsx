@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 import { Loading, Modal } from "../components";
 import { blogCategories, createNewBlog } from "../util/blogactions";
@@ -49,6 +51,8 @@ const WriteBlogPage = () => {
     } else {
       setError({ errorStatus: true, message: response.message });
     }
+
+    console.log(input);
   };
 
   return (
@@ -90,13 +94,15 @@ const WriteBlogPage = () => {
 
         <div className={style.formInputContainer}>
           <label htmlFor="summary">Blog Details</label>
-          <textarea
-            name="summary"
-            id="summary"
-            required
-            onChange={changeHandler}
+          <ReactQuill
+            theme="snow"
+            onChange={(summary) => {
+              setInput((prevState) => {
+                return { ...prevState, summary };
+              });
+            }}
             placeholder="Enter blog details"
-          ></textarea>
+          />
         </div>
 
         <div className={style.categoryContainer}>

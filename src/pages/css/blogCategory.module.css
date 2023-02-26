@@ -65,24 +65,30 @@
 @media screen and (max-width: 776px) {
   .blogContainer {
     flex-direction: column;
-
-    min-height: 525px;
     margin: 3rem 0;
   }
 
   .blogContainer .imgContainer {
     order: 1;
-    flex: 1;
-    height: 27.5rem;
+  }
+  .blogContainer .imgContainer div {
+    display: none;
+  }
+  .blogContainer .imgContainer img {
+    position: static;
+    height: 100%;
   }
 
   .blogContainer .blogContent {
-    flex: 1;
     order: 2;
     margin: 0;
   }
   .blogContainer .blogContent h2 {
     font-size: 3rem;
+    margin: 1.5rem 0;
+  }
+  .blogContainer .blogContent a {
+    margin: 1.5rem 0;
   }
   .blogContainer .blogContent p,
   .blogContainer .blogContent a {

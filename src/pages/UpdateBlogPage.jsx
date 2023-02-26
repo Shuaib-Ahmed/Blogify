@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 import { Loading, Modal } from "../components";
 import { blogCategories, getBlog, updateBlog } from "../util/blogactions";
@@ -117,13 +119,16 @@ const UpdateBlogPage = () => {
 
             <div className={style.formInputContainer}>
               <label htmlFor="summary">Blog Details</label>
-              <textarea
-                name="summary"
-                id="summary"
-                required
-                onChange={changeHandler}
+              <ReactQuill
+                theme="snow"
                 defaultValue={blog.summary}
-              ></textarea>
+                onChange={(summary) => {
+                  setInput((prevState) => {
+                    return { ...prevState, summary };
+                  });
+                }}
+                placeholder="Enter blog details"
+              />
             </div>
 
             <div className={style.categoryContainer}>

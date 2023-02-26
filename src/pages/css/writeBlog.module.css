@@ -27,17 +27,12 @@
   font-size: 2rem;
   margin: 0.5rem 0;
 }
-.formInputContainer textarea {
-  height: 47.5rem;
-}
-.formInputContainer input,
-.formInputContainer textarea {
+.formInputContainer input {
   font-size: 2rem;
   padding: 0.5rem;
-  border: 0;
+  border: none;
 }
-.formInputContainer input:focus,
-.formInputContainer textarea:focus {
+.formInputContainer input:focus {
   outline: none;
 }
 
@@ -73,5 +68,6 @@
 @media screen and (max-width: 776px) {
   .formContent {
     width: 100%;
+    padding: 1.5rem;
   }
 }

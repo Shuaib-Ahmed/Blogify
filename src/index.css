@@ -91,6 +91,16 @@ button {
   text-decoration: underline;
 }
 
+.quill {
+  background-color: white;
+  color: black;
+}
+.ql-container.ql-snow {
+  height: 500px;
+  font-family: "Raleway", sans-serif;
+  font-size: 2rem;
+}
+
 @media screen and (max-width: 996px) {
   .formContainer .formContent {
     width: 70%;
