@@ -59,6 +59,7 @@
 
   .blogContainer .blogContent {
     flex: 3;
+    margin: 0;
   }
 }
 
@@ -68,15 +69,21 @@
     margin: 3rem 0;
   }
 
+  .blogContainer .blogContent {
+    flex: 0;
+  }
+
   .blogContainer .imgContainer {
     order: 1;
+    position: "static";
+    flex: 0;
   }
   .blogContainer .imgContainer div {
     display: none;
   }
   .blogContainer .imgContainer img {
     position: static;
-    height: 100%;
+    height: 30rem;
   }
 
   .blogContainer .blogContent {
