@@ -35,14 +35,16 @@ const AccountBlogSection = ({ user_id }) => {
   };
 
   const deleteHandler = async (blog_id) => {
-    setError({ errorStatus: false, message: "" });
+    if (window.confirm("Are you sure about deleting this post")) {
+      setError({ errorStatus: false, message: "" });
 
-    setLoading(true);
-    const response = await deletetBlog(blog_id);
-    setLoading(false);
+      setLoading(true);
+      const response = await deletetBlog(blog_id);
+      setLoading(false);
 
-    if (response.errorStatus) {
-      setError({ errorStatus: true, message: response.message });
+      if (response.errorStatus) {
+        setError({ errorStatus: true, message: response.message });
+      }
     }
   };
 
@@ -56,12 +58,14 @@ const AccountBlogSection = ({ user_id }) => {
         {blogs.map((data) => {
           const { title, blog_id, blog_image } = data;
           return (
-            <div
-              key={blog_id}
-              className={style.blogContainer}
-              onClick={() => navigate(`/blog/${blog_id}`)}
-            >
-              <img src={blog_image} alt="blog pic" width={200} height={200} />
+            <div key={blog_id} className={style.blogContainer}>
+              <img
+                src={blog_image}
+                alt="blog pic"
+                width={200}
+                height={200}
+                onClick={() => navigate(`/blog/${blog_id}`)}
+              />
 
               <h2>{title}</h2>
 

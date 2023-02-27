@@ -38,6 +38,7 @@
 .blogDetailContainer .blogSummary {
   font-size: 2rem;
   line-height: 1.5;
+  color: var(--primaryTextColor);
 }
 
 @media screen and (max-width: 1056px) {
@@ -56,7 +57,7 @@
   .blogDetailContainer .blogImage {
     height: 375px;
   }
-  .blogDetailContainer .blogDetails h1{
+  .blogDetailContainer .blogDetails h1 {
     font-size: 3rem;
   }
 }

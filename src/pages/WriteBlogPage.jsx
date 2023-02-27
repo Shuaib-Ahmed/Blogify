@@ -51,8 +51,6 @@ const WriteBlogPage = () => {
     } else {
       setError({ errorStatus: true, message: response.message });
     }
-
-    console.log(input);
   };
 
   return (

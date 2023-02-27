@@ -20,7 +20,7 @@ const ForgotPasswordPage = () => {
     setLoading(false);
 
     if (!response.errorStatus) {
-      console.log("Email send");
+      alert("Email has been sent, please kindly check");
     } else {
       setError({ errorStatus: true, message: response.message });
     }

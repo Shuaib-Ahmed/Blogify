@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faUser,
@@ -14,6 +14,8 @@ import { blogCategories } from "../util/blogactions";
 import style from "./css/navbar.module.css";
 
 const Navbar = () => {
+  const navigate = useNavigate();
+
   const [login, setLogin] = useState(false);
   const [showNav, setShowNav] = useState(false);
 
@@ -39,7 +41,9 @@ const Navbar = () => {
 
   return (
     <nav className={style.navbar}>
-      <h3 className={style.logo}>Blogify</h3>
+      <h3 className={style.logo} onClick={() => navigate("/")}>
+        Blogify
+      </h3>
 
       <section
         className={`${style.navLinks} ${

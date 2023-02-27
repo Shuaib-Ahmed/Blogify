@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import "./index.css";
 
 import {
@@ -22,55 +22,95 @@ import {
   BlogDetailPage,
 } from "./pages";
 
+import { Loading } from "./components";
+
 import { blogCategories } from "./util/blogactions";
 
 const App = () => {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" element={<LayoutPage />}>
-        <Route index element={<HomePage />} />
-        <Route path="sign-up" element={<SignUpPage />} />
-        <Route path="log-in" element={<LoginPage />} />
-        <Route path="forgot-password" element={<ForgotPasswordPage />} />
+        <Route
+          index
+          element={
+            <Suspense fallback={<Loading />}>
+              <HomePage />
+            </Suspense>
+          }
+        />
+        <Route
+          path="sign-up"
+          element={
+            <Suspense fallback={<Loading />}>
+              <SignUpPage />
+            </Suspense>
+          }
+        />
+        <Route
+          path="log-in"
+          element={
+            <Suspense fallback={<Loading />}>
+              <LoginPage />
+            </Suspense>
+          }
+        />
+        <Route
+          path="forgot-password"
+          element={
+            <Suspense fallback={<Loading />}>
+              <ForgotPasswordPage />
+            </Suspense>
+          }
+        />
         {blogCategories.map((category) => {
           return (
             <Route
               path="blogs/:category"
-              element={<BlogCategoryPage />}
+              element={
+                <Suspense fallback={<Loading />}>
+                  <BlogCategoryPage />
+                </Suspense>
+              }
               key={category}
             />
           );
         })}
         <Route
+          path="blog/:blog_id"
+          element={
+            <Suspense fallback={<Loading />}>
+              <BlogDetailPage />
+            </Suspense>
+          }
+        />
+        <Route
           path="write-new-blog"
           element={
-            <ProtectPage>
-              <WriteBlogPage />
-            </ProtectPage>
+            <Suspense fallback={<Loading />}>
+              <ProtectPage>
+                <WriteBlogPage />
+              </ProtectPage>
+            </Suspense>
           }
         />
         <Route
           path="account"
           element={
-            <ProtectPage>
-              <AccountPage />
-            </ProtectPage>
+            <Suspense fallback={<Loading />}>
+              <ProtectPage>
+                <AccountPage />
+              </ProtectPage>
+            </Suspense>
           }
         />
         <Route
           path="update-blog/:blog_id"
           element={
-            <ProtectPage>
-              <UpdateBlogPage />
-            </ProtectPage>
-          }
-        />
-        <Route
-          path="blog/:blog_id"
-          element={
-            <ProtectPage>
-              <BlogDetailPage />
-            </ProtectPage>
+            <Suspense fallback={<Loading />}>
+              <ProtectPage>
+                <UpdateBlogPage />
+              </ProtectPage>
+            </Suspense>
           }
         />
       </Route>

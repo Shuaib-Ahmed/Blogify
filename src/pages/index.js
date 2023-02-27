@@ -1,25 +1,28 @@
+import { lazy } from "react";
+
 import LayoutPage from "./LayoutPage";
-import SignUpPage from "./SignUpPage";
-import LoginPage from "./LoginPage";
-import ForgotPasswordPage from "./ForgotPasswordPage";
-import HomePage from "./HomePage";
-import BlogCategoryPage from "./BlogCategoryPage";
-import WriteBlogPage from "./WriteBlogPage";
-import UpdateBlogPage from "./UpdateBlogPage";
-import AccountPage from "./AccountPage";
 import ProtectPage from "./ProtectPage";
-import BlogDetailPage from "./BlogDetailPage";
+
+const HomePage = lazy(() => import("./HomePage"));
+const LoginPage = lazy(() => import("./LoginPage"));
+const SignUpPage = lazy(() => import("./SignUpPage"));
+const ForgotPasswordPage = lazy(() => import("./ForgotPasswordPage"));
+const WriteBlogPage = lazy(() => import("./WriteBlogPage"));
+const AccountPage = lazy(() => import("./AccountPage"));
+const BlogCategoryPage = lazy(() => import("./BlogCategoryPage"));
+const BlogDetailPage = lazy(() => import("./BlogDetailPage"));
+const UpdateBlogPage = lazy(() => import("./UpdateBlogPage"));
 
 export {
   LayoutPage,
+  ProtectPage,
+  HomePage,
   SignUpPage,
   LoginPage,
   ForgotPasswordPage,
-  HomePage,
   BlogCategoryPage,
   WriteBlogPage,
   UpdateBlogPage,
   AccountPage,
-  ProtectPage,
-  BlogDetailPage
+  BlogDetailPage,
 };
